@@ -1,0 +1,10 @@
+CREATE TABLE [dbo].[AccountingTable] (
+    [Type]     INT           NOT NULL,
+    [Catagory] NVARCHAR (20) NOT NULL,
+    [Item]     NVARCHAR (50) NOT NULL,
+    [Year]     INT           NOT NULL,
+    [Month]    INT           NOT NULL,
+    [Day]      INT           NOT NULL,
+    [Date]     NVARCHAR (50) NOT NULL,
+    [Amount]   INT           NOT NULL
+);
