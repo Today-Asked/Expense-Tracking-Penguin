@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,6 +17,9 @@ public class SetDate : MonoBehaviour
     public Button day_btn;
     public Button Close;
 
+    public newDatabaseScript ndbs;
+    public TMPro.TMP_Text inputDate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +28,16 @@ public class SetDate : MonoBehaviour
         day_btn.enabled = false;
         Close.enabled = false;
         Save.onClick.AddListener(Create);
+    }
+
+    public void OnButtonPress()
+    {
+        int year = Convert.ToInt32(inputDate.text.Split('-')[0]);
+        int month = Convert.ToInt32(inputDate.text.Split('-')[1]);
+        StringBuilder tmp = new StringBuilder(inputDate.text.Split('-')[2]);
+        tmp[2] = '\0';
+        int day = Convert.ToInt32(tmp.ToString());
+        ndbs.read(year, month, day);
     }
 
     private void Create()
@@ -38,6 +52,6 @@ public class SetDate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

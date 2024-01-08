@@ -26,9 +26,8 @@ public class accountingInputController : MonoBehaviour
     }
 
     public void OnButtonClick()
-    {
-        if (!string.IsNullOrEmpty(inputItem.text) && !string.IsNullOrEmpty(inputAmount.text))
-        {
+    {   /* && !string.IsNullOrEmpty(inputAmount.text) && !(inputDate.text[0] >= '0' && inputDate.text[0] <= '9'))*/
+        if (!string.IsNullOrEmpty(inputItem.text)) {
 
             string item = inputItem.text;
             int year = Convert.ToInt32(inputDate.text.Split('-')[0]);
@@ -52,11 +51,12 @@ public class accountingInputController : MonoBehaviour
                 {
                     Debug.Log(i);
                 }*/
+                inputItem.text = inputAmount.text = "";
                 ndbs.insert(0, catagory, item, year, month, day, date, amount);
             }
             else
             {
-                int catagory = ddlInc.value;
+                int catagory = 8;
                 Debug.Log($"0: Inc");
                 Debug.Log($"1: {catagory}");
                 Debug.Log($"2: {item}");
@@ -68,7 +68,9 @@ public class accountingInputController : MonoBehaviour
                 {
                     Debug.Log(i);
                 }*/
+                inputItem.text = inputAmount.text = "";
                 ndbs.insert(1, catagory, item, year, month, day, date, amount);
+
             }
         }
         else

@@ -18,7 +18,7 @@ public class toggleIncControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     void OnRatioButtonValueChanged(bool isOn)
     {

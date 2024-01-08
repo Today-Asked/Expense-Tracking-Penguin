@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Year_Save : MonoBehaviour
-{
+public class Year_Save : MonoBehaviour {
     public Text Date;
     public InputField Year;
     public Button Save;
@@ -14,21 +14,26 @@ public class Year_Save : MonoBehaviour
     public Button month_btn;
     public Button day_btn;
     public Button Close;
+
+    public newDatabaseScript ndbs;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         Date.text = "";
-        Year.text = "2023";
+        DateTime currtime = DateTime.Now;
+        string year = currtime.Year.ToString();
+        Year.text = year;
         year_btn.enabled = false;
         month_btn.enabled = false;
         day_btn.enabled = false;
         Close.enabled = false;
         Save.onClick.AddListener(Create);
     }
+    public void OnButtonPress() {
+        ndbs.read(int.Parse(Year.text), -1, -1);
+    }
 
     // Update is called once per frame
-    public void  Create()
-    {
+    public void Create() {
         Date.text = Year.text;
         PlayerPrefs.SetString("", Date.text);
         PlayerPrefs.Save();
@@ -39,15 +44,13 @@ public class Year_Save : MonoBehaviour
         Close.enabled = true;
     }
 
-    public void Up()
-    {
+    public void Up() {
         int year = int.Parse(Year.text);
         year++;
         Year.text = year.ToString();
     }
 
-    public void Down()
-    {
+    public void Down() {
         int year = int.Parse(Year.text);
         year--;
         Year.text = year.ToString();

@@ -15,7 +15,7 @@ public class PieChart : MonoBehaviour
     public Image[] imagePieChart1;
     public float[] values1;
     //content
-    
+
     public GameObject DataSpace;
 
     public GameObject Content;
@@ -45,13 +45,12 @@ public class PieChart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void recieve(string str)
     {
-        string[] strs = new string[10];
-        strs = str.Split(',');
+        string[] strs = str.Split(',');
         for (int i = 0; i < 10; i++)
         {
             Debug.Log($"$${int.Parse(strs[i])}");
@@ -60,34 +59,44 @@ public class PieChart : MonoBehaviour
         {
             values[i] = int.Parse(strs[i]);
         }
+        values1[0] = int.Parse(strs[8]);//
+        values1[1] = int.Parse(strs[9]);
         foreach (float i in values1)
         {
             Debug.Log($"&{i}");
         }
-        values1[0] = int.Parse(strs[8]);
-        values1[1] = int.Parse(strs[9]);
-        //SetValue(values, imagePieChart);
-        //SetValue(values1, imagePieChart1);
+        SetValue(values, imagePieChart);
+        SetValue(values1, imagePieChart1);//
+        foreach (Transform child in ParentObject)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in ParentObject1)
+        {
+            Destroy(child.gameObject);
+        }
+        SetData(values, Content, ParentObject, tagName, tag);
+        SetData(values1, Content1, ParentObject1, tagName1, tag1);
     }
 
     public void SetValue(float[] valuesToSet, Image[] imagePieChart)
     {
         float totalValues = 0;
-        for(int i = 0; i < imagePieChart.Length; i++)
+        for (int i = 0; i < imagePieChart.Length; i++)
         {
             totalValues += FindPercentage(valuesToSet, i);
             imagePieChart[i].fillAmount = totalValues;
         }
     }
 
-    private float FindPercentage(float[] valueToSet , int index)
+    private float FindPercentage(float[] valueToSet, int index)
     {
         float totalAmount = 0;
-        for(int i = 0; i < valueToSet.Length; i++)
+        for (int i = 0; i < valueToSet.Length; i++)
         {
             totalAmount += valueToSet[i];
         }
-        if(totalAmount == 0)
+        if (totalAmount == 0)
         {
             return 0;
         }
@@ -98,7 +107,7 @@ public class PieChart : MonoBehaviour
     {
         cnt = 0;
         count = 0;
-        for(int i = 0; i <  values.Length; i++)
+        for (int i = 0; i < values.Length; i++)
         {
             if (values[i] != 0)
             {
@@ -118,7 +127,7 @@ public class PieChart : MonoBehaviour
         {
             if (values[i] != 0)
             {
-                Vector3 spawnPosition = Content.transform.position + new Vector3(0f, -80 -120f * cnt, 0f);
+                Vector3 spawnPosition = Content.transform.position + new Vector3(0f, -80 - 120f * cnt, 0f);
                 GameObject Temp = Instantiate(DataSpace, ParentObject);
                 Temp.transform.position = spawnPosition;
                 //change the image

@@ -13,7 +13,7 @@ public class Change : MonoBehaviour
     public GameObject In_Out_S;
     public void Changed()
     {
-        if(btn_text.text == "Expenditures")
+        if (btn_text.text == "Expenditures")
         {
             In_Out.SetActive(true);
             Out.SetActive(false);
